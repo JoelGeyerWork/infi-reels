@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f1020" />
+  <title>אינפי – רילס של משפטים</title>
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <span class="brand">אינפי · רילס</span>
+    <div class="topbar-right">
+      <select id="chapter-filter" class="chapter-filter" aria-label="סינון לפי פרק"></select>
+      <div class="progress" id="progress">— / —</div>
+    </div>
+  </header>
+
+  <main id="feed" class="feed" aria-label="פיד משפטים"></main>
+
+  <div id="hint" class="hint">הקש על הכרטיס כדי לראות את ההוכחה · החלק למעלה למשפט הבא</div>
+
+  <script defer src="app.js"></script>
+</body>
+</html>

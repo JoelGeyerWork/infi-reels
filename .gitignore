@@ -1,0 +1,6 @@
+.DS_Store
+node_modules/
+.vercel/
+
+# Source course material — content lives in theorems.json; don't publish the raw PDF
+*.pdf
