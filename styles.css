@@ -153,20 +153,29 @@ html, body {
   height: 100%;
   transition: transform .62s cubic-bezier(.5, .05, .25, 1);
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
 }
-.card.flipped .card-inner { transform: rotateY(180deg); }
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+}
 
 .face {
   position: absolute;
   inset: 0;
+  /* NOTE: do not add overflow here — on iOS Safari `overflow` together with
+     backface-visibility:hidden breaks backface culling, leaving the front
+     face visible (mirrored) after the flip. The full-bleed .slide clips. */
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   display: flex;
   flex-direction: column;
   padding: calc(var(--topbar-h) + 26px) 26px 30px;
-  overflow: hidden;
 }
-.face-back { transform: rotateY(180deg); }
+.face-back {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+}
 
 /* giant ghosted theorem numeral */
 .bg-num {
