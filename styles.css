@@ -144,38 +144,30 @@ html, body {
 .card {
   position: absolute;
   inset: 0;
-  perspective: 2400px;
+  perspective: 1600px;
   cursor: pointer;
 }
 .card-inner {
   position: relative;
   width: 100%;
   height: 100%;
-  transition: transform .62s cubic-bezier(.5, .05, .25, 1);
-  transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
-}
-.card.flipped .card-inner {
-  transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg);
+  transition: transform .24s ease;
+  will-change: transform;
 }
 
+/* Only one face is ever displayed (toggled in JS at the edge-on midpoint of
+   the turn). No backface-visibility / preserve-3d — those are unreliable
+   across browsers and caused the proof side to show the mirrored statement. */
 .face {
   position: absolute;
   inset: 0;
-  /* NOTE: do not add overflow here — on iOS Safari `overflow` together with
-     backface-visibility:hidden breaks backface culling, leaving the front
-     face visible (mirrored) after the flip. The full-bleed .slide clips. */
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   display: flex;
   flex-direction: column;
   padding: calc(var(--topbar-h) + 26px) 26px 30px;
 }
-.face-back {
-  transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg);
-}
+.face-back { display: none; }
+.card.show-proof .face-front { display: none; }
+.card.show-proof .face-back { display: flex; }
 
 /* giant ghosted theorem numeral */
 .bg-num {

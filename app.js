@@ -94,10 +94,31 @@
     inner.appendChild(buildFace("statement", t));
     inner.appendChild(buildFace("proof", t));
     card.appendChild(inner);
-    card.addEventListener("click", () => card.classList.toggle("flipped"));
+    card.addEventListener("click", () => flipCard(card));
 
     slide.appendChild(card);
     return slide;
+  }
+
+  // Flip = rotateY out to edge-on, swap the visible face, rotate back in.
+  // Only one face is displayed at a time, so the proof can never show as a
+  // mirrored statement (avoids backface-visibility, which is browser-flaky).
+  const HALF = 230;
+  function flipCard(card) {
+    if (card.dataset.turning) return;
+    card.dataset.turning = "1";
+    const inner = card.querySelector(".card-inner");
+    inner.style.transition = `transform ${HALF}ms ease-in`;
+    inner.style.transform = "rotateY(90deg)";
+    setTimeout(() => {
+      card.classList.toggle("show-proof");
+      inner.style.transition = "none";
+      inner.style.transform = "rotateY(-90deg)";
+      void inner.offsetWidth; // commit the jump before animating back
+      inner.style.transition = `transform ${HALF}ms ease-out`;
+      inner.style.transform = "rotateY(0deg)";
+      setTimeout(() => { delete card.dataset.turning; }, HALF);
+    }, HALF);
   }
 
   const renderMath = (root) =>
