@@ -3,8 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
-  <meta name="theme-color" content="#0f1020" />
-  <title>אינפי – רילס של משפטים</title>
+  <meta name="theme-color" content="#0a0a0c" />
+  <title>אינפי – רילס</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
 
   <!-- KaTeX -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous" />
@@ -15,16 +20,28 @@
 </head>
 <body>
   <header class="topbar">
-    <span class="brand">אינפי · רילס</span>
+    <span class="brand">אינפי</span>
     <div class="topbar-right">
-      <select id="chapter-filter" class="chapter-filter" aria-label="סינון לפי פרק"></select>
-      <div class="progress" id="progress">— / —</div>
+      <button id="shuffle-btn" class="icon-btn" aria-label="ערבוב">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+      </button>
+      <div class="filter" id="filter">
+        <button id="filter-toggle" class="filter-toggle" aria-haspopup="true" aria-expanded="false">
+          <span id="filter-label">כל הפרקים</span>
+          <span class="chev" aria-hidden="true">▾</span>
+        </button>
+        <div id="filter-panel" class="filter-panel" hidden>
+          <div class="filter-head">בחירת פרקים</div>
+          <div id="chapter-chips" class="chip-row"></div>
+        </div>
+      </div>
+      <div class="progress" id="progress">∞</div>
     </div>
   </header>
 
   <main id="feed" class="feed" aria-label="פיד משפטים"></main>
 
-  <div id="hint" class="hint">הקש על הכרטיס כדי לראות את ההוכחה · החלק למעלה למשפט הבא</div>
+  <div id="hint" class="hint">גלילה אינסופית · משפט אקראי בכל פעם · הקש על הכרטיס לראות את ההוכחה</div>
 
   <script defer src="app.js"></script>
 </body>
