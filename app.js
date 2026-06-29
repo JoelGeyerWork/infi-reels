@@ -21,6 +21,7 @@
   const numOf = (ref) => (ref.match(/[\d.]+/) || [""])[0];
 
   let ALL = [];
+  let maxFreq = 1;
   const selected = new Set();
   let bag = [], lastRef = null, removedCount = 0, filling = false;
 
@@ -54,6 +55,20 @@
         ? `<span class="ktitle">${t.title}</span>`
         : "");
     face.appendChild(kicker);
+
+    if (kind === "statement") {
+      const freq = t.occurrences || 1;
+      // green (rare) → red (very common); fixed corner so it never shifts
+      const span = maxFreq > 1 ? (freq - 1) / (maxFreq - 1) : 0;
+      const hue = Math.round(130 - 130 * span);
+      const heat = document.createElement("div");
+      heat.className = "heat";
+      heat.style.setProperty("--hh", String(hue));
+      heat.title = "מספר הופעות בבחינות";
+      heat.innerHTML =
+        `<span class="heat-n">${freq}×</span><span class="heat-cap">בחינות</span>`;
+      face.appendChild(heat);
+    }
 
     const content = document.createElement("div");
     content.className = "content";
@@ -252,6 +267,7 @@
     try {
       const res = await fetch("theorems.json");
       ALL = await res.json();
+      maxFreq = ALL.reduce((m, t) => Math.max(m, t.occurrences || 1), 1);
     } catch (e) {
       feed.innerHTML =
         '<section class="slide"><div class="content" style="text-align:center">שגיאה בטעינת המשפטים</div></section>';

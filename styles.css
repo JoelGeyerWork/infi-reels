@@ -212,6 +212,26 @@ html, body {
   font-size: .92rem;
   color: var(--muted);
 }
+/* frequency heat indicator — sits under the title, color scales rare→common */
+.heat {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 7px;
+  z-index: 1;
+}
+.heat .heat-n {
+  font-weight: 800;
+  font-size: .82rem;
+  font-variant-numeric: tabular-nums;
+  color: hsl(var(--hh) 95% 66%);
+}
+.heat .heat-cap {
+  font-size: .72rem;
+  font-weight: 500;
+  color: var(--muted);
+}
 
 /* body */
 .content {
